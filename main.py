@@ -47,9 +47,7 @@ class Cracker:
             self.characters = CHARACTER
         return True
     def encodePasswordWithFileType(file_type, password):
-        if file_type=="ZIP":
-            return password.encode()
-        return password
+        return password.encode() if file_type=="ZIP" else password
     def end(self, message):
         print(message)
         parser.exit()
@@ -96,9 +94,8 @@ class Cracker:
         else:
             found_pass = self.bruteNoRule(compressed_file)
         if found_pass != False:
-            print("Pass="+found_pass)
+            self.end("Pass="+found_pass)
         else:
-            print("Not found pass")
-        parser.exit()
+            self.end("Not found pass")
 cracker = Cracker(sys.argv[1:])
 cracker.run()
